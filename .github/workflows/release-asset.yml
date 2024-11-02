@@ -15,10 +15,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build
-        run: echo ${{ github.sha }} > test.txt
+        run: |
+          mkdir a b
+          echo "a${{ github.sha }}" > a/test.txt
+          echo "b${{ github.sha }}" > b/test.txt
       - name: Test
-        run: cat test.txt
+        run: head */test.txt
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          files: test.txt
+          files: |
+            a/test.txt
+            b/test.txt
