@@ -1,0 +1,18 @@
+name: Debug
+
+on:
+  workflow_dispatch:
+  release:
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump env
+        run: env | sort
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+          GITHUB_ASSESTS: ${{ toJson(github.event.release.assets) }}
+        run: |
+          echo "$GITHUB_ASSETS"
