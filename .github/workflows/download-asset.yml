@@ -1,0 +1,22 @@
+name: Download Asset
+
+on:
+  workflow_dispatch:
+  release:
+    types: ["released"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get URL
+        id: get_url
+        uses: actions/github-script@v7
+        with:
+          script: |
+            ast=github.event.release.assets.first(.name.startsWith('test-'));
+            core.setOutput('url', ast.url);
+      - name: Check URL
+        env:
+          URL: ${{ steps.get_url.outputs.url }}
+        run: echo $URL
