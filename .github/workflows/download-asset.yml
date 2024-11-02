@@ -9,14 +9,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Dump GitHub Event
+        env:
+          GITHUB_EVENT: ${{ toJson(github.event) }}
+        run: echo "$GITHUB_EVENT"
       - name: Get URL
         id: get_url
         uses: actions/github-script@v7
         with:
           script: |
-            const rel = await(github.event.release);
-            const url = rel.assets.find(a => startsWith(a.name, 'test-') && endsWith(a.name, '.tar.gz')).url;
-            core.setOutput('url', url);
+            const asset = github.event.release.assets.find(a => startsWith(a.name, 'test-') && endsWith(a.name, '.tar.gz'));
+            core.setOutput('url', asset.url);
       - name: Check URL
         env:
           URL: ${{ steps.get_url.outputs.url }}

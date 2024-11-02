@@ -32,6 +32,7 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
+          token: ${{ secrets.UGH_TOKEN }}
           files: |
             test-${{ github.ref_name }}.tar.gz
             test-${{ github.ref_name }}.zip
