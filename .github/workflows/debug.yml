@@ -1,0 +1,17 @@
+name: Debug
+
+on:
+  workflow_dispatch:
+  release:
+    types: ["released"]
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump env
+        run: env | sort
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
