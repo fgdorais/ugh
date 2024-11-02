@@ -16,14 +16,22 @@ jobs:
         uses: actions/checkout@v4
       - name: Build
         run: |
-          mkdir a b
-          echo "a${{ github.sha }}" > a/test.txt
-          echo "b${{ github.sha }}" > b/test.txt
+          mkdir -p test/a test/b
+          cd test
+          echo "test a ${{ github.sha }}" > a/test.txt
+          echo "test b ${{ github.sha }}" > b/test.txt
       - name: Test
-        run: head */test.txt
+        run: head test/*/*
+      - name: Compress
+        working-directory: test
+        env:
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          tar -czf ../test-${TAG_NAME}.tar.gz a b
+          zip -rq ../test-${TAG_NAME}.zip a b
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            a
-            b
+            test-v*.tar.gz
+            test-v*.zip
