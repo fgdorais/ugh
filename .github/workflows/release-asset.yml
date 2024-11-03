@@ -36,3 +36,8 @@ jobs:
           files: |
             test-${{ github.ref_name }}.tar.gz
             test-${{ github.ref_name }}.zip
+      - name: Update Stable
+        run: |
+          git tag -d stable
+          git tag stable
+          git push --tags

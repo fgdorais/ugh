@@ -24,7 +24,7 @@ jobs:
             return github.event.release.assets.contains((a) => startsWith(a.name, "test-"))
       - name: Get URL
         id: docs-url
-        if: steps.docs-check.outputs.return
+        if: false
         uses: actions/github-script@v7
         with:
           debug: true
@@ -33,6 +33,7 @@ jobs:
             const docs = assets.find(a => startsWith(a.name, 'test-'));
             core.setOutput('url', docs.browser_download_url);
       - name: Check URL
+        if: false
         env:
           URL: ${{ steps.docs-url.outputs.url }}
         run: echo $URL
