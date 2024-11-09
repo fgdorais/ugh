@@ -38,6 +38,8 @@ jobs:
             test-${{ github.ref_name }}.zip
       - name: Deploy Docs
         run: |
+          git config user.name 'Release Bot'
+          git config user.email 'fgdorais-release-bot@users.noreply.github.com'
           git checkout -b docs
           git commit -m 'chore: generate docs' --allow-empty
           git push origin docs --force
