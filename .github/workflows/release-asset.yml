@@ -39,6 +39,5 @@ jobs:
       - name: Deploy Docs
         run: |
           git checkout -b docs
-          git add docs/index.html
-          git commit -m 'chore: generate docs'
+          git commit -m 'chore: generate docs' --allow-empty
           git push origin docs --force
