@@ -38,6 +38,8 @@ jobs:
             test-${{ github.ref_name }}.zip
       - name: Deploy Docs
         run: |
+          git config --global user.name 'F. G. Dorais'
+          git config --global user.email 'fgdorais@users.noreply.github.com'
           git checkout -b docs
           git commit -m 'chore: generate docs' --allow-empty
           git push origin docs --force
