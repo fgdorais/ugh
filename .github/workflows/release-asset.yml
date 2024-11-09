@@ -38,6 +38,11 @@ jobs:
             test-${{ github.ref_name }}.zip
       - name: Update Stable
         run: |
-          git tag -d stable
           git tag stable
           git push --tags
+      - name: Deploy Docs
+        run: |
+          git checkout -b docs
+          git add docs/index.html
+          git commit -m 'chore: generate docs'
+          git push origin docs --force
