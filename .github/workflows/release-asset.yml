@@ -36,8 +36,9 @@ jobs:
           files: |
             test-${{ github.ref_name }}.tar.gz
             test-${{ github.ref_name }}.zip
-      - name: Update Stable
+      - name: Deploy Docs
         run: |
-          git tag -d stable
-          git tag stable
-          git push --tags
+          git checkout -b docs
+          git add docs/index.html
+          git commit -m 'chore: generate docs'
+          git push origin docs --force
