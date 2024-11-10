@@ -22,7 +22,7 @@ on:
 
 jobs:
   auto-label:
-    if: github.repository_owner == 'leanprover-community'
+    # if: github.repository_owner == 'leanprover-community'
     runs-on: ubuntu-latest
     steps:
 
