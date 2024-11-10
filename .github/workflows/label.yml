@@ -34,7 +34,6 @@ jobs:
       if: github.event.pull_request.state == 'closed'
       uses: actions-ecosystem/action-remove-labels@v1
       with:
-        fail_on_error: false
         labels: |
           WIP
           awaiting-author
