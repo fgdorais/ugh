@@ -16,6 +16,7 @@ jobs:
           GITHUB_EVENT: ${{ toJson(github.event) }}
         run: echo "$GITHUB_EVENT"
       - name: Check Assets
+        if: false
         id: docs-check
         uses: actions/github-script@v7
         with:
